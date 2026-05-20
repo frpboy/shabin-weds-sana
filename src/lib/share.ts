@@ -15,9 +15,9 @@ export async function shareToInstagram(text: string, url: string): Promise<'nati
         url: url,
       });
       return 'native';
-    } catch (err: any) {
+    } catch (err: unknown) {
       // User cancelled the share sheet — don't do anything else
-      if (err?.name === 'AbortError') return 'failed';
+      if (err instanceof Error && err.name === 'AbortError') return 'failed';
     }
   }
 

@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SectionContainer from '../ui/layout/SectionContainer';
 import SectionTitle from '../ui/layout/SectionTitle';
 import { BiCheck, BiX, BiSend, BiMinus, BiPlus, BiLoaderAlt, BiCheckCircle } from 'react-icons/bi';
-import { MdFavorite, MdPeople } from 'react-icons/md';
+import { MdFavorite } from 'react-icons/md';
+import { content } from '../../content';
 
 interface RsvpEntry {
   fullName?: string;
@@ -64,8 +65,9 @@ export default function RsvpSection() {
       setEntries((prev) => [newEntry, ...prev]);
       setSubmitted(true);
       setFormData({ fullName: '', attendance: 'yes', guestCount: 1, dietaryOrNotes: '' });
-    } catch (err: any) {
-      setErrorMsg(err.message || 'Unable to connect. Please try again.');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Unable to connect. Please try again.';
+      setErrorMsg(message);
     } finally {
       setIsSubmitting(false);
     }
@@ -77,17 +79,12 @@ export default function RsvpSection() {
   const getName = (e: RsvpEntry) => e.fullName || e.full_name || 'Guest';
   const getNote = (e: RsvpEntry) => e.dietaryOrNotes || e.dietary_or_notes || '';
 
-  const attendingEntries = entries.filter((e) => e.attendance === 'yes');
-  const totalGuests = attendingEntries.reduce((sum, e) => {
-    return sum + parseInt(String(e.guestCount ?? e.guest_count ?? 1), 10);
-  }, 0);
-
   return (
     <SectionContainer id="rsvp" className="relative z-10 py-12 md:py-24">
-      <SectionTitle title="RSVP & Wishes" subtitle="Please reply by July 1st, 2026" />
+      <SectionTitle title={content.rsvp.sectionTitle} subtitle={content.rsvp.sectionSubtitle} />
 
       {/* 3-col grid on desktop, stacked on mobile */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-start max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start max-w-5xl mx-auto">
 
         {/* ══════════════════════════
             Column 1 — RSVP Form
@@ -218,58 +215,7 @@ export default function RsvpSection() {
         </div>
 
         {/* ══════════════════════════
-            Column 2 — Guest Counter
-            ══════════════════════════ */}
-        <div className={`${themeCard} p-7 flex flex-col gap-5`}>
-          {/* Bismillah ornament */}
-          <div className="text-center">
-            <span className="text-primary/50 text-5xl select-none leading-none font-light">﷽</span>
-          </div>
-
-          <h3 className="font-cinzel text-xs text-primary tracking-[0.2em] uppercase text-center font-semibold">
-            Guest Count
-          </h3>
-
-          {fetching ? (
-            <div className="flex justify-center py-4">
-              <BiLoaderAlt className="animate-spin text-primary text-2xl" />
-            </div>
-          ) : entries.length === 0 ? (
-            <div className="text-center text-text/40 font-poppins text-xs py-4">
-              <MdFavorite className="text-primary/30 text-3xl mx-auto mb-2" />
-              Be the first to RSVP!
-            </div>
-          ) : (
-            <div className="space-y-3">
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-secondary border border-primary/20 shadow-sm">
-                <MdPeople className="text-primary text-2xl flex-shrink-0" />
-                <div>
-                  <p className="font-cinzel text-3xl text-accent font-semibold leading-none">{attendingEntries.length}</p>
-                  <p className="font-poppins text-[10px] text-text/50 uppercase tracking-widest mt-1">
-                    {attendingEntries.length === 1 ? 'person' : 'people'} attending
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-secondary border border-primary/20 shadow-sm">
-                <MdFavorite className="text-primary text-2xl flex-shrink-0" />
-                <div>
-                  <p className="font-cinzel text-3xl text-accent font-semibold leading-none">{totalGuests}</p>
-                  <p className="font-poppins text-[10px] text-text/50 uppercase tracking-widest mt-1">
-                    total {totalGuests === 1 ? 'guest' : 'guests'}
-                  </p>
-                </div>
-              </div>
-
-              <p className="font-poppins text-xs text-text/40 text-center pt-1">
-                {attendingEntries.length} {attendingEntries.length === 1 ? 'person' : 'people'} · {totalGuests} total guests
-              </p>
-            </div>
-          )}
-        </div>
-
-        {/* ══════════════════════════
-            Column 3 — Wishes Wall
+            Column 2 — Wishes Wall
             ══════════════════════════ */}
         <div className={`${themeCard} p-7 flex flex-col`} style={{ maxHeight: '480px' }}>
           <h3 className="font-cinzel text-xs text-primary tracking-[0.2em] uppercase mb-4 flex items-center gap-2 flex-shrink-0 font-semibold">

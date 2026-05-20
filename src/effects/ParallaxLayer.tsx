@@ -6,15 +6,9 @@ export default function ParallaxLayer() {
   // Map scroll progress to subtle vertical shifts
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -120]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const y3 = useTransform(scrollYProgress, [0, 1], [0, -60]);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-      {/* Background layer 1 (Deepest, slowest) */}
-      <motion.div style={{ y: y3 }} className="absolute left-[10%] top-[30%] opacity-15">
-        <div className="w-96 h-96 rounded-full border border-primary/20" />
-      </motion.div>
-
       {/* Background layer 2 (Mid depth) */}
       <motion.div style={{ y: y1 }} className="absolute right-[5%] top-[50%] opacity-20">
         <div className="w-[500px] h-[500px] rounded-full border border-primary/30 rotate-12 flex items-center justify-center">

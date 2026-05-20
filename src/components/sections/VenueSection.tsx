@@ -12,8 +12,8 @@ export default function VenueSection() {
   const calendarUrl = weddingData.wedding.calendarUrl;
 
   return (
-    <SectionContainer id="venue" className="relative z-10">
-      <SectionTitle title="The Venue" subtitle="Where our sacred journey begins" />
+    <SectionContainer id="venue" className="relative z-10 pt-2 md:pt-4">
+      <SectionTitle title="The Venue" subtitle="Where our sacred journey begins" className="my-4 md:my-6" />
 
       <div className="max-w-2xl mx-auto px-4">
         {/* Unified Venue Information & Map Card */}

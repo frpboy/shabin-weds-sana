@@ -13,7 +13,7 @@ export default function GallerySection() {
     { id: 1, url: '/images/Indhira-Jason-Wedding-23-ea0654d1228142eeab611e87d3f27e40.webp', caption: 'Sacred Vows' },
     { id: 2, url: '/images/JackandVivian-KellyHornberger-111-738f6a7872c648bcb69efd1932148ed0.webp', caption: 'Blessed Union' },
     { id: 3, url: '/images/AFTERCEREMONY-45-a52a8b106fd34d989e3a4de7c4388e70.webp', caption: 'Cherished Moments' },
-    { id: 4, url: '/images/Wedding-Pose-Caroline-Tran-fd7be81338bc477b9a432061babc1283.webp', caption: 'Elegant Attire' },
+    { id: 4, url: '/images/Wedding-Pose-Janet-Lin-Photography-9ef7e73535e34beb967e9f7c360b12fb.webp', caption: 'Elegant Attire' },
     { id: 5, url: '/images/Wedding-Pose-FOR-THE-LOVE-OF-IT-81f2ea6b25ce4902b553c425779388c5.webp', caption: 'Together Forever' },
     { id: 6, url: '/images/Portraits-41-342c5ab4e22147cc84bad49a43f2e952.webp', caption: 'Endless Love' },
   ];
@@ -64,12 +64,12 @@ export default function GallerySection() {
   };
 
   return (
-    <SectionContainer id="gallery" className="relative z-10">
-      <SectionTitle title={content.gallery.sectionTitle} subtitle={content.gallery.sectionSubtitle} />
+    <SectionContainer id="gallery" className="relative z-10 pt-2 md:pt-4">
+      <SectionTitle title={content.gallery.sectionTitle} subtitle={content.gallery.sectionSubtitle} className="my-4 md:my-6" />
 
       <div className="max-w-4xl mx-auto px-4 relative flex flex-col items-center">
         <div
-          className="relative w-full max-w-[360px] md:max-w-[400px] aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl border border-primary/30 bg-secondary flex items-center justify-center select-none group cursor-grab active:cursor-grabbing"
+          className="relative w-full max-w-[310px] md:max-w-[340px] aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl border border-primary/30 bg-secondary flex items-center justify-center select-none group cursor-grab active:cursor-grabbing"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           onClick={(e) => {

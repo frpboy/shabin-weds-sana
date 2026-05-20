@@ -3,23 +3,28 @@ import { motion } from 'framer-motion';
 export default function AmbientGlow() {
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-      {/* Soft Ambient Orbs */}
+      {/* Ultra-subtle drifting gradient field (left) */}
       <motion.div
         animate={{
-          scale: [1, 1.1, 1],
-          opacity: [0.12, 0.2, 0.12],
+          x: [-16, 18, -16],
+          y: [-10, 14, -10],
+          scale: [1, 1.03, 1],
+          opacity: [0.06, 0.11, 0.06],
         }}
-        transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -top-[20vw] -left-[20vw] w-[70vw] h-[70vw] max-w-[800px] max-h-[800px] rounded-full bg-gradient-to-br from-primary/30 via-accent/10 to-transparent blur-[120px]"
+        transition={{ duration: 42, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute -top-[16vh] -left-[18vw] w-[58vw] h-[58vw] max-w-[680px] max-h-[680px] rounded-full bg-gradient-to-br from-primary/18 via-accent/8 to-transparent blur-[120px]"
       />
 
+      {/* Ultra-subtle drifting gradient field (right) */}
       <motion.div
         animate={{
-          scale: [1, 1.15, 1],
-          opacity: [0.08, 0.15, 0.08],
+          x: [10, -14, 10],
+          y: [8, -10, 8],
+          scale: [1, 1.08, 1],
+          opacity: [0.07, 0.13, 0.07],
         }}
-        transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
-        className="absolute top-[40vh] -right-[20vw] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] rounded-full bg-gradient-to-tl from-primary/25 via-accent/10 to-transparent blur-[100px]"
+        transition={{ duration: 48, repeat: Infinity, ease: 'easeInOut', delay: 6 }}
+        className="absolute top-[42vh] -right-[20vw] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] rounded-full bg-gradient-to-tl from-primary/20 via-accent/8 to-transparent blur-[110px]"
       />
 
       {/* Subtle Luxury Vignette */}

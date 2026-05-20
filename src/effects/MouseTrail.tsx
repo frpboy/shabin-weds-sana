@@ -15,7 +15,6 @@ interface Particle {
 const PARTICLE_COUNT = 30;
 
 export default function MouseTrail() {
-  const auraRef = useRef<HTMLDivElement>(null);
   const particleRefs = useRef<(HTMLDivElement | null)[]>([]);
   const particles = useRef<Particle[]>([]);
   const poolIndex = useRef(0);
@@ -77,10 +76,6 @@ export default function MouseTrail() {
       mc.currX += (mc.x - mc.currX) * 0.15;
       mc.currY += (mc.y - mc.currY) * 0.15;
 
-      if (auraRef.current) {
-        auraRef.current.style.transform = `translate3d(${mc.currX - 150}px, ${mc.currY - 150}px, 0px)`;
-      }
-
       for (let i = 0; i < PARTICLE_COUNT; i++) {
         const p = particles.current[i];
         const el = particleRefs.current[i];
@@ -115,12 +110,6 @@ export default function MouseTrail() {
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[100] overflow-hidden select-none" aria-hidden="true">
-      {/* Soft golden aura tracking cursor */}
-      <div
-        ref={auraRef}
-        className="absolute left-0 top-0 w-[300px] h-[300px] rounded-full bg-gradient-to-r from-primary/25 via-amber-400/15 to-transparent blur-[70px] opacity-30 will-change-transform"
-      />
-
       {/* Floating Gold Hearts */}
       {Array.from({ length: PARTICLE_COUNT }).map((_, i) => (
         <div

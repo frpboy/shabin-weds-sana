@@ -7,7 +7,7 @@ import { weddingData } from '../../config/weddingData';
 
 export default function InvitationMessage() {
   return (
-    <SectionContainer id="invitation" className="relative z-10 pt-4 md:pt-12">
+    <SectionContainer id="invitation" className="relative z-10 pt-4 md:pt-12 pb-2 md:pb-4">
       <div className="flex flex-col items-center justify-center text-center mb-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
@@ -47,7 +47,7 @@ export default function InvitationMessage() {
           </div>
         </Card>
 
-        <div className="mt-12">
+        <div className="mt-4 md:mt-6">
           <AnimatedDivider />
         </div>
       </div>
