@@ -4,21 +4,26 @@ import SectionContainer from '../ui/layout/SectionContainer';
 import SectionTitle from '../ui/layout/SectionTitle';
 import { content } from '../../content';
 
+const galleryModules = import.meta.glob('/public/images/*.{webp,WEBP,jpg,JPG,jpeg,JPEG,png,PNG}', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>;
+
+const photos = Object.entries(galleryModules)
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([_, url], index) => ({
+    id: index + 1,
+    url: url.replace('/public', ''),
+    caption: `Captured Moment ${index + 1}`,
+  }));
+
 export default function GallerySection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  const photos = [
-    { id: 1, url: '/images/Indhira-Jason-Wedding-23-ea0654d1228142eeab611e87d3f27e40.webp', caption: 'Sacred Vows' },
-    { id: 2, url: '/images/JackandVivian-KellyHornberger-111-738f6a7872c648bcb69efd1932148ed0.webp', caption: 'Blessed Union' },
-    { id: 3, url: '/images/AFTERCEREMONY-45-a52a8b106fd34d989e3a4de7c4388e70.webp', caption: 'Cherished Moments' },
-    { id: 4, url: '/images/Wedding-Pose-Janet-Lin-Photography-9ef7e73535e34beb967e9f7c360b12fb.webp', caption: 'Elegant Attire' },
-    { id: 5, url: '/images/Wedding-Pose-FOR-THE-LOVE-OF-IT-81f2ea6b25ce4902b553c425779388c5.webp', caption: 'Together Forever' },
-    { id: 6, url: '/images/Portraits-41-342c5ab4e22147cc84bad49a43f2e952.webp', caption: 'Endless Love' },
-  ];
-
   useEffect(() => {
+    if (photos.length === 0) return;
     if (isHovered) return;
     const timer = setInterval(() => {
       setDirection(1);
@@ -28,11 +33,13 @@ export default function GallerySection() {
   }, [isHovered, photos.length]);
 
   const handleNext = () => {
+    if (photos.length === 0) return;
     setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % photos.length);
   };
 
   const handlePrev = () => {
+    if (photos.length === 0) return;
     setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + photos.length) % photos.length);
   };
@@ -79,46 +86,53 @@ export default function GallerySection() {
             else if (x > (rect.width * 2) / 3) handleNext();
           }}
         >
+          {photos.length === 0 && (
+            <div className="text-center text-primary/70 font-poppins text-sm px-4">
+              No gallery images found in `/public/images`.
+            </div>
+          )}
           <AnimatePresence initial={false} custom={direction} mode="popLayout">
-            <motion.div
-              key={activePhoto.id}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              className="absolute inset-0 overflow-hidden touch-none"
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.2}
-              onDragEnd={(_, info) => {
-                if (info.offset.x < -50) handleNext();
-                if (info.offset.x > 50) handlePrev();
-              }}
-            >
-              {/* Image with subtle zoom drift */}
-              <motion.img
-                animate={{ scale: [1, 1.08, 1] }}
-                transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
-                src={activePhoto.url}
-                alt={activePhoto.caption}
-                loading={activePhoto.id === 1 ? "eager" : "lazy"}
-                className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 pointer-events-none"
-              />
+            {activePhoto && (
+              <motion.div
+                key={activePhoto.id}
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                className="absolute inset-0 overflow-hidden touch-none"
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(_, info) => {
+                  if (info.offset.x < -50) handleNext();
+                  if (info.offset.x > 50) handlePrev();
+                }}
+              >
+                {/* Image with subtle zoom drift */}
+                <motion.img
+                  animate={{ scale: [1, 1.08, 1] }}
+                  transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+                  src={activePhoto.url}
+                  alt={activePhoto.caption}
+                  loading={activePhoto.id === 1 ? "eager" : "lazy"}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 pointer-events-none"
+                />
 
-              {/* Warm tone layer & soft light leaks */}
-              <div className="absolute inset-0 bg-amber-950/10 mix-blend-color-burn pointer-events-none" />
-              <motion.div 
-                animate={{ opacity: [0.3, 0.5, 0.3] }}
-                transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-16 -left-16 w-48 h-48 bg-amber-500/10 rounded-full blur-[40px] pointer-events-none" 
-              />
-              <motion.div 
-                animate={{ opacity: [0.2, 0.4, 0.2] }}
-                transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-                className="absolute -bottom-16 -right-16 w-48 h-48 bg-primary/10 rounded-full blur-[40px] pointer-events-none" 
-              />
-            </motion.div>
+                {/* Warm tone layer & soft light leaks */}
+                <div className="absolute inset-0 bg-amber-950/10 mix-blend-color-burn pointer-events-none" />
+                <motion.div 
+                  animate={{ opacity: [0.3, 0.5, 0.3] }}
+                  transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+                  className="absolute -top-16 -left-16 w-48 h-48 bg-amber-500/10 rounded-full blur-[40px] pointer-events-none" 
+                />
+                <motion.div 
+                  animate={{ opacity: [0.2, 0.4, 0.2] }}
+                  transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+                  className="absolute -bottom-16 -right-16 w-48 h-48 bg-primary/10 rounded-full blur-[40px] pointer-events-none" 
+                />
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
 
