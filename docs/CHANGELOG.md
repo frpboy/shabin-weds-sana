@@ -4,6 +4,81 @@ All notable changes to this project are documented here.
 
 ---
 
+## v2.1.0 — 2026-05-20 | Cross-Project Theme Identity Migration (Sanu-Weds-Bijeesh → Shabin-Weds-Sana)
+
+### 🎯 Scope / Constraint Compliance
+- Applied a **full visual identity migration** from donor project `E:\K4NN4N\Sanu-Weds-Bijeesh` into this repo.
+- Preserved requested non-negotiables:
+  - **No layout rebuild**
+  - **No section/content/text changes**
+  - **No photo replacements**
+  - **No route or data-flow changes**
+
+### 🎨 Global Design Token Migration
+- Updated core theme palette from warm-ivory/emerald to donor-inspired cinematic luxury profile.
+- Files updated:
+  - `src/styles/globals.css` (`@theme` variables)
+  - `src/theme/tokens.ts`
+  - `src/config/wedding/branding.ts`
+  - `tailwind.config.js`
+- New token direction:
+  - `primary`: `#D4AF37` (gold)
+  - `secondary`: `#080506` (dark cinematic base)
+  - `accent`: `#F5E9D2` (high-contrast warm highlight for headings on dark)
+  - `text`: `#F6F1E8` (warm off-white body text)
+- Glass tokens rebalanced to donor behavior:
+  - `GLASS_BG`: `rgba(255,255,255,0.06)`
+  - `GLASS_BORDER`: `rgba(212,175,55,0.28)`
+
+### 🔤 Typography System Migration
+- Migrated font family stack to donor style while preserving existing typographic hierarchy usage in components.
+- Updated Google Fonts load in `index.html`:
+  - Added/kept: `Cinzel`
+  - Replaced script family with: `Great Vibes`
+  - Replaced body sans with: `Montserrat`
+- Updated token/tailwind aliases:
+  - `font-cinzel` → `Cinzel`
+  - `font-cormorant` mapping now points to `Great Vibes`
+  - `font-poppins` / `font-inter` mappings now point to `Montserrat`
+- Result: existing JSX class usage remains intact, but rendered type identity now matches donor theme.
+
+### 🌌 Global Surface + Atmosphere Treatment
+- `src/styles/globals.css`:
+  - Replaced flat ivory page base with **layered cinematic dark gradient** background.
+  - Improved legibility settings (`text-rendering: optimizeLegibility`).
+  - Preserved smooth scrolling and low-performance fallbacks.
+- Scrollbar system restyled to donor-like gold-on-dark behavior:
+  - Dark translucent track
+  - Gold thumb with stronger hover intensity
+  - Matching Firefox scrollbar color profile
+
+### 🧊 Shared Component Visual Migration (No Structural Changes)
+- `src/components/ui/cards/Card.tsx`
+  - `glass` variant now uses darker translucent surface, stronger gold border, and deeper luxury shadow.
+  - `default` variant shifted to dark glass-like card surface with matching border language.
+- `src/components/ui/buttons/Button.tsx`
+  - `solid` variant now donor gold CTA with black text + gold glow shadow.
+  - `outline` variant tuned for high-contrast gold stroke/hover-fill.
+  - `glass` variant moved to white-tint glass + gold edge treatment.
+- These changes propagate automatically across all sections using shared UI primitives.
+
+### ✨ Ambient Effects Color Harmonization
+- `src/effects/AmbientGlow.tsx`
+  - Updated drifting glow gradients to donor-aligned gold + deep maroon atmospheric mix.
+  - Kept existing motion model and durations; changed only chromatic composition.
+
+### ✅ Verification
+- Build verification executed after migration:
+  - Command: `npm run build`
+  - Result: **PASS**
+  - TypeScript + Vite production build completed successfully with generated assets.
+
+### 📌 Notes
+- This release intentionally modifies **visual identity layer only**.
+- All functional behavior, section order, copy, photos, and core layout composition remain unchanged by design.
+
+---
+
 ## v2.0.0 — 2026-05-17 | Full RSVP Backend + Polish Sprint
 
 ### 🗄️ Live RSVP Backend (Neon PostgreSQL)

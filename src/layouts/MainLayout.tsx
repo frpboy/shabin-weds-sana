@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
 import Lenis from 'lenis';
 import { JsonLd } from '../seo';
 
-export default function MainLayout() {
+export default function MainLayout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -25,9 +24,9 @@ export default function MainLayout() {
   }, []);
 
   return (
-    <div className="relative w-full min-h-screen bg-secondary">
+    <div className="relative w-full min-h-screen bg-transparent">
       <JsonLd />
-      <Outlet />
+      {children}
     </div>
   );
 }

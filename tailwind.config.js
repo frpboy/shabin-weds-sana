@@ -7,16 +7,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#C7A97F', // Champagne gold
-        secondary: '#F8F4EE', // Warm ivory
-        accent: '#2E4A3D', // Deep emerald
-        text: '#1A1A1A', // Matte black
+        primary: '#D4AF37', // Donor gold
+        secondary: '#080506', // Donor dark base
+        accent: '#F5E9D2', // Warm light accent for dark theme
+        text: '#F6F1E8', // Warm text tone
       },
       fontFamily: {
         cinzel: ['Cinzel', 'serif'],
-        cormorant: ['Cormorant Garamond', 'serif'],
-        poppins: ['Poppins', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
+        cormorant: ['Great Vibes', 'cursive'],
+        poppins: ['Montserrat', 'sans-serif'],
+        inter: ['Montserrat', 'sans-serif'],
       },
     },
   },

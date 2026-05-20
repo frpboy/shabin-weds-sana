@@ -16,7 +16,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{ mode, setMode, tokens: themeTokens }}>
-      <div className={`theme-${mode} min-h-screen bg-secondary font-poppins text-text antialiased selection:bg-primary/20 selection:text-accent`}>
+      <div className={`theme-${mode} min-h-screen bg-transparent font-poppins text-text antialiased selection:bg-primary/20 selection:text-accent`}>
         {children}
       </div>
     </ThemeContext.Provider>

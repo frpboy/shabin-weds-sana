@@ -4,33 +4,30 @@ import SectionContainer from '../ui/layout/SectionContainer';
 import SectionTitle from '../ui/layout/SectionTitle';
 import { content } from '../../content';
 
-const galleryModules = import.meta.glob('/public/images/*.{webp,WEBP,jpg,JPG,jpeg,JPEG,png,PNG}', {
-  eager: true,
-  import: 'default',
-}) as Record<string, string>;
+type GalleryPhoto = {
+  id: number;
+  url: string;
+  caption: string;
+};
 
-const photos = Object.entries(galleryModules)
-  .sort(([a], [b]) => a.localeCompare(b))
-  .map(([_, url], index) => ({
-    id: index + 1,
-    url: url.replace('/public', ''),
-    caption: `Captured Moment ${index + 1}`,
-  }));
-
-export default function GallerySection() {
+export default function GallerySection({ photos }: { photos: GalleryPhoto[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (photos.length === 0) return;
-    if (isHovered) return;
     const timer = setInterval(() => {
       setDirection(1);
       setCurrentIndex((prev) => (prev + 1) % photos.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [isHovered, photos.length]);
+  }, [photos.length]);
+
+  useEffect(() => {
+    if (currentIndex >= photos.length && photos.length > 0) {
+      setCurrentIndex(0);
+    }
+  }, [currentIndex, photos.length]);
 
   const handleNext = () => {
     if (photos.length === 0) return;
@@ -77,8 +74,6 @@ export default function GallerySection() {
       <div className="max-w-4xl mx-auto px-4 relative flex flex-col items-center">
         <div
           className="relative w-full max-w-[310px] md:max-w-[340px] aspect-[9/16] rounded-2xl overflow-hidden shadow-2xl border border-primary/30 bg-secondary flex items-center justify-center select-none group cursor-grab active:cursor-grabbing"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
           onClick={(e) => {
             const rect = e.currentTarget.getBoundingClientRect();
             const x = e.clientX - rect.left;

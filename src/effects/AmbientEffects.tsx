@@ -1,14 +1,12 @@
-import AmbientGlow from './AmbientGlow';
+import ThreeBackground from './ThreeBackground';
 import MouseTrail from './MouseTrail';
-import ParallaxLayer from './ParallaxLayer';
 import FilmGrain from './FilmGrain';
 
 export default function AmbientEffects() {
   return (
     <>
+      <ThreeBackground />
       <FilmGrain />
-      <AmbientGlow />
-      <ParallaxLayer />
       <MouseTrail />
     </>
   );

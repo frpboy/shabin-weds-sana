@@ -17,8 +17,8 @@ interface RsvpEntry {
   created_at: string;
 }
 
-// Uses the site's glass card style — cream background, gold border
-const themeCard = 'relative rounded-2xl bg-secondary/70 backdrop-blur-md border border-primary/25 shadow-lg overflow-hidden';
+// Frosted-glass panel style (matches reference dark luxury card treatment)
+const themeCard = 'relative rounded-2xl bg-white/[0.035] backdrop-blur-xl border border-primary/35 shadow-[0_18px_48px_rgba(0,0,0,0.5)] overflow-hidden';
 
 export default function RsvpSection() {
   const [formData, setFormData] = useState({
@@ -84,12 +84,12 @@ export default function RsvpSection() {
       <SectionTitle title={content.rsvp.sectionTitle} subtitle={content.rsvp.sectionSubtitle} />
 
       {/* 3-col grid on desktop, stacked on mobile */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start md:items-stretch max-w-5xl mx-auto">
 
         {/* ══════════════════════════
             Column 1 — RSVP Form
             ══════════════════════════ */}
-        <div className={`${themeCard} p-7`}>
+        <div className={`${themeCard} p-7 h-full md:min-h-[560px]`}>
           <AnimatePresence mode="wait">
             {submitted ? (
               <motion.div
@@ -132,7 +132,7 @@ export default function RsvpSection() {
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                     required
-                    className="w-full bg-secondary border border-primary/30 rounded-xl px-4 py-3 text-sm text-text placeholder-text/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/40 transition-all"
+                    className="w-full bg-black/35 backdrop-blur-sm border border-primary/30 rounded-xl px-4 py-3 text-sm text-text placeholder-text/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/40 transition-all"
                   />
                 </div>
 
@@ -151,7 +151,7 @@ export default function RsvpSection() {
                         className={`flex items-center justify-center gap-2 py-3 px-3 rounded-xl border transition-all duration-300 font-poppins text-xs font-medium cursor-pointer ${
                           formData.attendance === value
                             ? 'border-primary bg-primary/15 text-accent shadow-[0_0_12px_rgba(199,169,127,0.15)]'
-                            : 'border-primary/20 bg-secondary text-text/60 hover:border-primary/50'
+                            : 'border-primary/20 bg-black/30 text-text/60 hover:border-primary/50'
                         }`}
                       >
                         <Icon className={`text-base ${formData.attendance === value ? 'text-primary' : 'text-text/40'}`} />
@@ -171,7 +171,7 @@ export default function RsvpSection() {
                       className="space-y-1.5 overflow-hidden"
                     >
                       <label className="block font-poppins text-[10px] uppercase tracking-widest text-primary font-semibold">Number of Guests</label>
-                      <div className="flex items-center gap-4 bg-secondary border border-primary/30 rounded-xl p-2.5 w-fit">
+                      <div className="flex items-center gap-4 bg-black/30 backdrop-blur-sm border border-primary/30 rounded-xl p-2.5 w-fit">
                         <button type="button" onClick={() => handleGuestChange(-1)} className="w-8 h-8 rounded-lg border border-primary/40 flex items-center justify-center text-primary hover:bg-primary/10 transition-colors cursor-pointer text-sm">
                           <BiMinus />
                         </button>
@@ -194,7 +194,7 @@ export default function RsvpSection() {
                     placeholder="Write your heartfelt wishes..."
                     value={formData.dietaryOrNotes}
                     onChange={(e) => setFormData({ ...formData, dietaryOrNotes: e.target.value })}
-                    className="w-full bg-secondary border border-primary/30 rounded-xl p-4 text-sm text-text placeholder-text/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/40 transition-all resize-none leading-relaxed"
+                    className="w-full bg-black/35 backdrop-blur-sm border border-primary/30 rounded-xl p-4 text-sm text-text placeholder-text/30 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/40 transition-all resize-none leading-relaxed"
                   />
                 </div>
 
@@ -217,7 +217,7 @@ export default function RsvpSection() {
         {/* ══════════════════════════
             Column 2 — Wishes Wall
             ══════════════════════════ */}
-        <div className={`${themeCard} p-7 flex flex-col`} style={{ maxHeight: '480px' }}>
+        <div className={`${themeCard} p-7 flex flex-col h-full md:min-h-[560px]`}>
           <h3 className="font-cinzel text-xs text-primary tracking-[0.2em] uppercase mb-4 flex items-center gap-2 flex-shrink-0 font-semibold">
             <MdFavorite className="text-primary/60" /> Wishes & Prayers
           </h3>
@@ -241,7 +241,7 @@ export default function RsvpSection() {
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.35 }}
-                  className="p-3.5 rounded-xl bg-secondary border border-primary/20 shadow-sm space-y-1.5 overflow-hidden"
+                  className="p-3.5 rounded-xl bg-black/28 backdrop-blur-sm border border-primary/25 shadow-sm space-y-1.5 overflow-hidden"
                 >
                   <span className={`flex items-center gap-1.5 text-[10px] font-poppins font-semibold uppercase tracking-wider ${
                     entry.attendance === 'yes' ? 'text-emerald-600' : 'text-text/40'

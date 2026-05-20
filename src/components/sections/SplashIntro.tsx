@@ -48,43 +48,45 @@ export default function SplashIntro({ onEnter }: SplashIntroProps) {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8, ease: EASE.luxury }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-secondary px-6 text-center select-none overflow-hidden"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-transparent px-6 text-center select-none overflow-hidden"
         >
-          <div className="absolute inset-0 opacity-10 pointer-events-none flex items-center justify-center">
-            <div className="w-[120vw] h-[120vw] max-w-[800px] max-h-[800px] border-[2px] border-primary rotate-45 rounded-[100px]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-secondary/18 via-secondary/12 to-secondary/16 pointer-events-none" />
+
+          <div className="absolute inset-0 opacity-20 pointer-events-none flex items-center justify-center">
+            <div className="w-[160vw] h-[160vw] max-w-[1450px] max-h-[1450px] border border-primary/25 rotate-45 rounded-[88px]" />
           </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: 'easeOut' }}
-            className="relative z-10 max-w-lg mx-auto flex flex-col items-center"
+            className="relative z-10 max-w-xl mx-auto flex flex-col items-center"
           >
-            <span className="font-cormorant italic text-lg md:text-xl text-primary mb-6 tracking-wide">
+            <span className="font-cormorant italic text-xl md:text-2xl text-primary mb-5 tracking-wide">
               ﷽
             </span>
-            <p className="font-cormorant italic text-base md:text-lg text-accent/80 mb-8 tracking-wider">
+            <p className="font-cormorant italic text-base md:text-2xl text-accent/90 mb-10 tracking-wide leading-relaxed">
               "In the name of Allah, the Most Gracious, the Most Merciful"
             </p>
 
-            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border border-primary/40 flex items-center justify-center mb-6 bg-secondary/80 shadow-inner">
-              <span className="font-cinzel text-2xl md:text-3xl text-primary font-semibold tracking-tighter">
+            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border border-primary/50 flex items-center justify-center mb-7 bg-white/[0.03] backdrop-blur-sm shadow-inner">
+              <span className="font-cinzel text-2xl md:text-3xl text-primary font-medium tracking-tighter">
                 {weddingData.monogram}
               </span>
             </div>
 
-            <h1 className="font-cinzel text-2xl md:text-4xl text-accent font-medium mb-2 tracking-wide max-w-md leading-tight">
+            <h1 className="font-cinzel text-3xl md:text-6xl text-accent font-medium mb-2 tracking-wide max-w-3xl leading-tight">
               <span className="block">{weddingData.groom.fullName}</span>
-              <span className="block font-cormorant italic text-primary text-xl md:text-2xl my-1 font-light">&</span>
+              <span className="block font-cormorant italic text-primary text-3xl md:text-4xl my-1.5 font-light">&</span>
               <span className="block">{weddingData.bride.fullName}</span>
             </h1>
-            <p className="font-poppins uppercase text-xs md:text-sm tracking-[0.25em] text-primary mb-6 font-medium">
+            <p className="font-poppins uppercase text-sm md:text-[28px] tracking-[0.2em] text-primary mb-7 font-medium">
               Wedding Celebration
             </p>
 
             {/* Personalized Guest Greeting */}
-            <div className="py-2.5 px-6 rounded-full bg-primary/10 border border-primary/30 mb-8 max-w-sm">
-              <span className="font-poppins text-xs md:text-sm text-accent font-medium tracking-wide">
+            <div className="py-3 px-8 rounded-full bg-primary/8 border border-primary/35 mb-8 max-w-sm shadow-[0_0_18px_rgba(212,175,55,0.12)]">
+              <span className="font-poppins text-base md:text-2xl text-accent font-medium tracking-wide">
                 {guestName ? `Dear ${guestName} & Family` : content.splash.defaultGreeting}
               </span>
             </div>
@@ -93,7 +95,7 @@ export default function SplashIntro({ onEnter }: SplashIntroProps) {
               variant="solid"
               size="lg"
               onClick={handleOpen}
-              className="min-w-[200px] shadow-lg shadow-primary/20 hover:shadow-xl cursor-pointer"
+              className="min-w-[230px] text-base md:text-lg shadow-[0_10px_32px_rgba(212,175,55,0.32)] hover:shadow-[0_16px_44px_rgba(212,175,55,0.42)] cursor-pointer rounded-lg"
             >
               {content.splash.enterButton}
             </Button>

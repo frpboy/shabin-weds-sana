@@ -1,8 +1,8 @@
 export const branding = {
   theme: {
-    primary: "#C7A97F",
-    secondary: "#F8F4EE",
-    accent: "#2E4A3D",
-    text: "#1A1A1A",
+    primary: "#D4AF37",
+    secondary: "#080506",
+    accent: "#F5E9D2",
+    text: "#F6F1E8",
   },
 } as const;

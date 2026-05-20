@@ -26,10 +26,11 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative z-10 bg-secondary text-text pt-20 pb-24 px-6 text-center">
-      <div className="max-w-4xl mx-auto flex flex-col items-center">
+    <footer className="relative z-10 bg-transparent text-text pt-20 pb-24 px-6 text-center overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-secondary/8 via-secondary/16 to-secondary/22 pointer-events-none" />
+      <div className="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
         {/* Monogram */}
-        <div className="w-16 h-16 rounded-full border border-primary/60 flex items-center justify-center mb-8 bg-secondary shadow-inner">
+        <div className="w-16 h-16 rounded-full border border-primary/60 flex items-center justify-center mb-8 bg-white/5 backdrop-blur-sm shadow-inner">
           <span className="font-cinzel text-xl text-primary font-medium tracking-tighter">
             {weddingData.monogram}
           </span>

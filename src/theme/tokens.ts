@@ -1,19 +1,19 @@
 export const COLORS = {
-  PRIMARY: '#C7A97F',    // Champagne gold
-  SECONDARY: '#F8F4EE',  // Warm ivory
-  ACCENT: '#2E4A3D',     // Deep emerald
-  TEXT: '#1A1A1A',       // Matte black
+  PRIMARY: '#D4AF37',    // Donor gold
+  SECONDARY: '#080506',  // Donor cinematic dark base
+  ACCENT: '#F5E9D2',     // Warm light accent for headings on dark base
+  TEXT: '#F6F1E8',       // Warm text tone
   WHITE: '#FFFFFF',
-  GLASS_BG: 'rgba(248, 244, 238, 0.75)',
-  GLASS_BORDER: 'rgba(199, 169, 127, 0.25)',
+  GLASS_BG: 'rgba(255, 255, 255, 0.06)',
+  GLASS_BORDER: 'rgba(212, 175, 55, 0.28)',
 } as const;
 
 export const TYPOGRAPHY = {
   FONTS: {
     HEADING_CINZEL: "'Cinzel', serif",
-    HEADING_CORMORANT: "'Cormorant Garamond', serif",
-    BODY_POPPINS: "'Poppins', sans-serif",
-    BODY_INTER: "'Inter', sans-serif",
+    HEADING_CORMORANT: "'Great Vibes', cursive",
+    BODY_POPPINS: "'Montserrat', sans-serif",
+    BODY_INTER: "'Montserrat', sans-serif",
   },
   SIZES: {
     XS: '0.75rem',

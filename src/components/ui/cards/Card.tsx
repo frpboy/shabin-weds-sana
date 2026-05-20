@@ -10,8 +10,8 @@ export interface CardProps extends HTMLMotionProps<'div'> {
 export default function Card({ variant = 'glass', children, className = '', ...props }: CardProps) {
   const baseStyles = 'rounded-xl p-6 md:p-10 transition-all';
   const variants = {
-    glass: 'bg-secondary/70 border border-primary/25 shadow-lg backdrop-blur-md',
-    default: 'bg-secondary border border-primary/20 shadow-md',
+    glass: 'bg-white/5 border border-primary/35 shadow-[0_16px_42px_rgba(0,0,0,0.5)] backdrop-blur-md',
+    default: 'bg-black/55 border border-primary/30 shadow-[0_14px_36px_rgba(0,0,0,0.45)]',
     outline: 'border border-primary/40 bg-transparent shadow-none',
   };
 

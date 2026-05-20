@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { weddingData } from '../../config/weddingData';
 import { VARIANTS, EASE } from '../../motion';
@@ -11,10 +12,16 @@ export default function HeroContent() {
     month: 'long',
     day: 'numeric',
     year: 'numeric',
+    timeZone: 'Asia/Kolkata',
   }).format(new Date(weddingData.wedding.date));
 
   const timeLeft = useCountdown(weddingData.wedding.date);
   const reducedMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Fade out scroll indicator on scroll down
   const { scrollY } = useScroll();
@@ -36,7 +43,7 @@ export default function HeroContent() {
         className="mb-8 flex items-center justify-center"
       >
         <div className="w-20 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-        <div className="w-2 h-2 rotate-45 border border-primary/60 bg-transparent mx-4" />
+        <div className="w-2 h-2 rounded-full bg-primary/60 mx-4" />
         <div className="w-20 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
       </motion.div>
 
@@ -83,7 +90,9 @@ export default function HeroContent() {
           <motion.div key={unit.label} variants={VARIANTS.scaleUp(reducedMotion)}>
             <div className="flex flex-col items-center justify-center py-5 px-3 md:py-6 md:px-5 rounded-2xl border border-primary/15 bg-primary/[0.03] backdrop-blur-md text-center shadow-[0_8px_32px_rgba(199,169,127,0.06)] hover:border-primary/30 transition-all duration-500">
               <span className="font-cinzel text-3xl md:text-5xl text-accent font-light mb-1.5 tracking-tight">
-                {String(unit.value).padStart(2, '0')}
+                <span suppressHydrationWarning>
+                  {mounted ? String(unit.value).padStart(2, '0') : '00'}
+                </span>
               </span>
               <span className="font-poppins uppercase text-[9px] md:text-xs tracking-[0.25em] text-primary/80 font-medium">
                 {unit.label}
