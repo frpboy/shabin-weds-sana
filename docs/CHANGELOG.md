@@ -4,6 +4,48 @@ All notable changes to this project are documented here.
 
 ---
 
+## v2.2.1 — 2026-05-21 | Vercel Deployment Stabilization + Final Visual Alignment
+
+### ☁️ Vercel Build/Deploy Fixes
+- Resolved Vercel output mismatch after Next migration:
+  - Added `vercel.json` with `{"framework":"nextjs"}` so the project is treated as Next.js (not static `dist` build output).
+- Resolved duplicate serverless function collision:
+  - Removed legacy `api/rsvp.ts` after migrating to Next App Route.
+  - Kept canonical route handler at `app/api/rsvp/route.ts`.
+- Result:
+  - Vercel builds now complete and proceed to deployment without:
+    - missing `dist` output errors
+    - `.vc-config.json already exists` function path conflicts
+
+### 🌌 Three.js Visibility & Layering Corrections
+- Fixed hidden/flat-background behavior where Three.js scene was present but visually blocked by opaque wrappers.
+- Key fixes:
+  - `src/layouts/MainLayout.tsx`: `bg-secondary` → `bg-transparent`
+  - scene layering and background container consistency retained in global styles.
+- Re-aligned scene behavior to donor-style constants for better visual parity after iterative tuning.
+
+### 🧊 RSVP Frosted Glass & Panel Consistency
+- Enhanced RSVP section to darker premium frosted-glass style:
+  - panel surfaces, input surfaces, and wishes cards now share consistent translucent glass treatment.
+- Enforced equal desktop panel heights for RSVP form and wishes column:
+  - stretch alignment + shared minimum height.
+
+### 🧩 Footer Atmosphere Continuity
+- Footer was refined to blend with ambient scene:
+  - transparent base with subtle gradient overlay,
+  - removed hard black slab effect.
+
+### ✅ Verification
+- Repeated local verification completed:
+  - `npm run build` passed after each major change.
+- Vercel build logs confirm:
+  - Next.js 16.2.6 build success
+  - route generation success (`/`, `/_not-found`, `/api/rsvp`)
+  - output packaging success in `/vercel/output`
+  - deployment handoff started successfully.
+
+---
+
 ## v2.2.0 — 2026-05-21 | Next.js Migration + Reference Visual Parity Pass
 
 ### 🚀 Platform Migration (Vite → Next.js App Router)
