@@ -4,6 +4,111 @@ All notable changes to this project are documented here.
 
 ---
 
+## v2.2.0 — 2026-05-21 | Next.js Migration + Reference Visual Parity Pass
+
+### 🚀 Platform Migration (Vite → Next.js App Router)
+- Migrated the project from Vite + React Router to **Next.js 16 App Router** without changing user-facing content.
+- Added App Router structure:
+  - `app/layout.tsx`
+  - `app/page.tsx`
+  - `app/providers.tsx`
+  - `app/globals.css`
+- Replaced React Router layout outlet flow with children-based layout composition:
+  - `src/layouts/MainLayout.tsx`
+- Added Next-compatible environment/type setup:
+  - `next-env.d.ts`
+  - updated `tsconfig.json`
+- Removed Vite-only entry/config files after migration:
+  - `src/main.tsx`
+  - `src/App.tsx`
+  - `src/vite-env.d.ts`
+  - `vite.config.ts`
+  - `tsconfig.node.json`
+
+### 🗂️ Gallery Runtime Compatibility (Next-safe)
+- Replaced Vite `import.meta.glob` image loading with filesystem-driven image discovery for Next:
+  - `src/lib/galleryImages.ts`
+- Moved page component path to avoid Next `app`+`pages` directory conflict:
+  - `src/pages/Home.tsx` → `src/screens/Home.tsx`
+- Updated gallery section to receive images as props instead of static Vite glob internals:
+  - `src/components/sections/GallerySection.tsx`
+
+### 🔌 API Migration
+- Added Next API route for RSVP backend compatibility:
+  - `app/api/rsvp/route.ts`
+- Preserved existing GET/POST behavior and response contract used by frontend RSVP section.
+
+### 🕰️ Hydration Stability Fixes
+- Fixed SSR/client hydration mismatch in countdown values:
+  - `src/hooks/useCountdown.ts`
+  - `src/components/sections/HeroContent.tsx`
+  - `src/components/sections/CountdownSection.tsx`
+- Implemented deterministic pre-mount values and hydration-safe value rendering.
+- Locked hero date formatting to `Asia/Kolkata` to avoid server/client locale-timezone drift.
+
+### 🌌 Three.js Global Background Integration (Reference-driven)
+- Added site-wide Three.js scene component and mounted globally via ambient effects:
+  - `src/effects/ThreeBackground.tsx`
+  - `src/effects/AmbientEffects.tsx`
+  - `src/effects/index.ts`
+- Added fixed scene container styling:
+  - `src/styles/globals.css` (`#threejs-container`)
+- Removed duplicate hero-only Three.js layer and unified rendering path.
+- Corrected layering blockers so scene is visible through all sections:
+  - `src/providers/ThemeProvider.tsx`
+  - `src/layouts/MainLayout.tsx`
+  - `src/pages/Home.tsx` (later moved to `src/screens/Home.tsx`)
+  - `src/components/sections/Hero.tsx`
+  - `src/components/sections/HeroBackground.tsx`
+
+### 🎞️ Motion & Visual Parity Refinements
+- Added stronger scene tuning and then aligned back to donor-equivalent constants for parity:
+  - particle density/space distribution
+  - mouse-reactive rotation
+  - wireframe ambient objects
+  - dark radial scene backing
+- Reworked hero overlay intensity to avoid masking the Three.js field.
+
+### 🖼️ Splash Intro Visual Match Pass
+- Updated splash screen composition to match ceremonial diamond-card look:
+  - larger rotated frame
+  - refined monogram block treatment
+  - title scale/spacing adjustments
+  - greeting pill + CTA styling alignment
+- File updated:
+  - `src/components/sections/SplashIntro.tsx`
+
+### 🧊 Frosted Glass UI Pass (RSVP)
+- Added darker luxury frosted-glass treatment to RSVP form and wishes panels:
+  - higher blur
+  - transparent layered fills
+  - refined border/shadow language
+  - inner item glass cards and controls updated
+- File updated:
+  - `src/components/sections/RsvpSection.tsx`
+
+### 📐 Equalized Card Heights
+- Enforced same desktop height for RSVP left/right cards:
+  - stretch alignment in grid
+  - shared minimum height
+- File updated:
+  - `src/components/sections/RsvpSection.tsx`
+
+### 🧩 Footer Atmosphere Continuity
+- Removed hard black footer slab and blended footer back into ambient scene:
+  - transparent footer base
+  - subtle overlay gradient
+  - frosted monogram badge
+- File updated:
+  - `src/components/sections/Footer.tsx`
+
+### ✅ Verification
+- Repeated verification throughout migration and styling passes:
+  - `npm run build` executed multiple times
+  - Final status: **PASS** on Next.js 16.2.6 (App Router + `/api/rsvp`)
+
+---
+
 ## v2.1.0 — 2026-05-20 | Cross-Project Theme Identity Migration (Sanu-Weds-Bijeesh → Shabin-Weds-Sana)
 
 ### 🎯 Scope / Constraint Compliance
