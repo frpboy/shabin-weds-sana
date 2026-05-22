@@ -76,7 +76,7 @@ export default function SplashIntro({ onEnter }: SplashIntroProps) {
             </div>
 
             <h1 className="font-cinzel text-3xl md:text-6xl text-accent font-medium mb-2 tracking-wide max-w-3xl leading-tight">
-              <span className="block">{weddingData.groom.fullName}</span>
+              <span className="block whitespace-nowrap">{weddingData.groom.fullName}</span>
               <span className="block font-cormorant italic text-primary text-3xl md:text-4xl my-1.5 font-light">&</span>
               <span className="block">{weddingData.bride.fullName}</span>
             </h1>
