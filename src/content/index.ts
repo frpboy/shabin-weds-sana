@@ -21,7 +21,7 @@ export const content = {
     sectionSubtitle: "The flow of our celebration",
     events: [
       {
-        time: "11:00 AM",
+    time: "4:30 PM onward",
         title: "Wedding Nikah & Reception",
         description: "The sacred ceremony followed by a celebratory feast.",
       },

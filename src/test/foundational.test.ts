@@ -8,7 +8,7 @@ describe('Foundational Utilities & Link Generation', () => {
       title: 'Wedding Nikah: Shabin & Sana',
       details: 'Blessed wedding celebration',
       location: 'Shifa Convention Center, Perinthalmanna',
-      startDateIso: '2026-07-19T11:00:00+05:30',
+      startDateIso: '2026-07-19T16:30:00+05:30',
       durationHours: 5,
     });
 
