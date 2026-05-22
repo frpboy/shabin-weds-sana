@@ -1,7 +1,7 @@
 # Technical Requirements Document
 
 ## Architecture & Stack
-- **Framework**: React + Vite
+- **Framework**: Next.js 16 App Router + React 19
 - **Styling**: Tailwind CSS
 - **Animation**: Framer Motion
 - **Routing**: React Router

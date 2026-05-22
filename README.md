@@ -1,6 +1,6 @@
 # 💍 Shabin & Sana | Premium Wedding Invitation Microsite
 
-> An elegant, mobile-first digital wedding invitation microsite for **Muhammed Shabin & Sana Subair**, crafted with React, Vite, Tailwind CSS (v4), and Framer Motion. Deployed on Vercel with a live Neon PostgreSQL RSVP backend.
+> An elegant, mobile-first digital wedding invitation microsite for **Muhammed Shabin & Sana Subair**, crafted with Next.js 16 App Router, React 19, Tailwind CSS (v4), and Framer Motion. Deployed on Vercel with a live Neon PostgreSQL RSVP backend.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ffrpboy%2Fshabin-weds-sana)
 [![Live Site](https://img.shields.io/badge/Live%20Site-shabin--weds--sana.vercel.app-brightgreen)](https://shabin-weds-sana.vercel.app/)
@@ -64,12 +64,12 @@ Designed to evoke calm, emotional resonance, and high-fidelity aesthetics, this 
    );
    ```
 
-5. **Start both dev servers** (Vite frontend + Neon API):
+5. **Start development server**:
    ```bash
    npm run dev
    ```
    - Frontend → `http://localhost:5173`
-   - RSVP API → `http://localhost:3001/api/rsvp` (proxied via Vite)
+- RSVP API → `http://localhost:3000/api/rsvp` (served by Next.js Route Handler)
 
 6. **Production build**:
    ```bash
@@ -82,9 +82,9 @@ Designed to evoke calm, emotional resonance, and high-fidelity aesthetics, this 
 
 ```
 shabin-weds-sana/
-├── api/
-│   └── rsvp.ts               # Vercel serverless: GET (fetch) + POST (save) RSVPs → Neon DB
-├── server.mjs                # Local dev API server (mirrors Vercel function, port 3001)
+├── app/
+│   ├── page.tsx              # App Router home page
+│   └── api/rsvp/route.ts     # RSVP API route handler (GET + POST) → Neon DB
 ├── public/
 │   ├── favicon/favicon.svg   # S&S circular gold emblem
 │   ├── images/               # All wedding photos (local WebP)
@@ -130,7 +130,7 @@ export const weddingData = {
 
 | Layer | Technology |
 |---|---|
-| Framework | React 18 + Vite + TypeScript |
+| Framework | Next.js 16 App Router + React 19 + TypeScript |
 | Styling | Tailwind CSS v4 + PostCSS |
 | Animation | Framer Motion |
 | Smooth Scroll | Lenis |
@@ -146,13 +146,10 @@ export const weddingData = {
 
 | Script | Description |
 |---|---|
-| `npm run dev` | Starts Vite frontend + local Neon API server concurrently |
-| `npm run dev:vite` | Vite frontend only |
-| `npm run dev:api` | Local API server only (port 3001) |
+| `npm run dev` | Starts Next.js dev server (app + API routes) |
 | `npm run build` | TypeScript check + production bundle |
-| `npm run preview` | Preview production build locally |
+| `npm run start` | Run production server after build |
 | `npm run optimize` | Compress images to WebP |
-| `npm test` | Run Vitest test suite |
 
 ---
 
@@ -161,7 +158,7 @@ export const weddingData = {
 1. Push to GitHub
 2. Import into Vercel
 3. Add `DATABASE_URL` environment variable in Vercel project settings
-4. Deploy — `/api/rsvp.ts` is automatically served as a serverless function
+4. Deploy — `/api/rsvp` is automatically served from `app/api/rsvp/route.ts`
 
 ---
 

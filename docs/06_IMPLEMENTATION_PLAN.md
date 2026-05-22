@@ -1,7 +1,7 @@
 # Implementation Plan
 
 ## Phase 1: Foundation
-- Project setup (Vite, React, TS, Tailwind)
+- Project setup (Next.js App Router, React, TS, Tailwind)
 - Folder structure implementation
 - Routing setup
 - Typography and Design System integration (tailwind.config)

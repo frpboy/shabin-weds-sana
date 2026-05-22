@@ -88,3 +88,14 @@ html.lenis {
   scrollbar-width: thin;
   scrollbar-color: rgba(212, 175, 55, 0.55) transparent;
 }
+
+/* iOS Safari can over-tint images when blend layers stack over photos. */
+@supports (-webkit-touch-callout: none) {
+  .ios-hide {
+    display: none !important;
+  }
+
+  .ios-no-blend {
+    mix-blend-mode: normal !important;
+  }
+}

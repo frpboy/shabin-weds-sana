@@ -4,6 +4,22 @@ All notable changes to this project are documented here.
 
 ---
 
+## 2026-05-22 — Documentation Rebuild (Current Runtime Baseline)
+
+### ✅ Updated
+- `README.md` aligned to the live stack: **Next.js 16 App Router + React 19**.
+- Local development instructions updated to `npm run dev` with API served at `/api/rsvp`.
+- Architecture section updated to reflect `app/api/rsvp/route.ts` instead of legacy `api/rsvp.ts`.
+- Script table updated to match current `package.json` (`dev`, `build`, `start`, `optimize`).
+- `docs/02_TRD.md` framework line updated to Next.js App Router.
+- `docs/06_IMPLEMENTATION_PLAN.md` foundation phase updated from Vite setup to Next.js setup.
+- `docs/08_DEPLOYMENT.md` preset/API handler path updated for current Vercel + App Router routing.
+
+### ✅ Verification
+- `npm run build` passes on the current documentation baseline.
+
+---
+
 ## v2.2.1 — 2026-05-21 | Vercel Deployment Stabilization + Final Visual Alignment
 
 ### ☁️ Vercel Build/Deploy Fixes

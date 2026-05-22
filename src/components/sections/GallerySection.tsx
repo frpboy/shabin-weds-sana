@@ -115,7 +115,7 @@ export default function GallerySection({ photos }: { photos: GalleryPhoto[] }) {
                 />
 
                 {/* Warm tone layer & soft light leaks */}
-                <div className="absolute inset-0 bg-amber-950/10 mix-blend-color-burn pointer-events-none" />
+                <div className="absolute inset-0 bg-amber-950/10 mix-blend-color-burn pointer-events-none ios-hide" />
                 <motion.div 
                   animate={{ opacity: [0.3, 0.5, 0.3] }}
                   transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}

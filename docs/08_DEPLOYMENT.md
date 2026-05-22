@@ -29,14 +29,14 @@ git push origin main
 
 | Setting | Value |
 |---|---|
-| Framework Preset | Vite |
+| Framework Preset | Next.js |
 | Build Command | `npm run build` |
 | Output Directory | `dist` |
 | Install Command | `npm install` |
 | Node.js Version | 20.x |
 
 ### Serverless Functions
-`/api/rsvp.ts` is automatically detected and deployed as a Vercel Serverless Function.
+`/app/api/rsvp/route.ts` is automatically detected and deployed as a Vercel Serverless Function, served at `/api/rsvp`.
 No additional configuration needed.
 
 ## Environment Variables (Vercel Dashboard)
