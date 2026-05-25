@@ -6,7 +6,7 @@ export const content = {
     defaultGreeting: "Dear Family & Friends",
   },
   hero: {
-    invitationIntro: "We Joyfully Invite You To Celebrate",
+    invitationIntro: "We Joyfully Invite You To Celebrate Our Wedding",
     scrollToExplore: "Scroll to explore",
   },
   invitation: {
@@ -21,7 +21,7 @@ export const content = {
     sectionSubtitle: "The flow of our celebration",
     events: [
       {
-    time: "4:30 PM onward",
+        time: "4:30 PM onward",
         title: "Wedding Nikah & Reception",
         description: "The sacred ceremony followed by a celebratory feast.",
       },
