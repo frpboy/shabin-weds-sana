@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SectionContainer from '../ui/layout/SectionContainer';
 import SectionTitle from '../ui/layout/SectionTitle';
-import { BiCheck, BiX, BiSend, BiLoaderAlt, BiCheckCircle } from 'react-icons/bi';
+import { BiCheck, BiX, BiSend, BiMinus, BiPlus, BiLoaderAlt, BiCheckCircle } from 'react-icons/bi';
 import { MdFavorite } from 'react-icons/md';
 import { content } from '../../content';
 
@@ -83,7 +83,8 @@ export default function RsvpSection() {
     }
   };
 
-  const guestOptions = [1, 2, 3, 4, 5];
+  const handleGuestChange = (delta: number) =>
+    setFormData((p) => ({ ...p, guestCount: Math.max(1, Math.min(10, p.guestCount + delta)) }));
 
   const getName = (e: RsvpEntry) => e.fullName || e.full_name || 'Guest';
   const getNote = (e: RsvpEntry) => e.dietaryOrNotes || e.dietary_or_notes || '';
@@ -200,29 +201,14 @@ export default function RsvpSection() {
                       className="space-y-1.5 overflow-hidden flex flex-col items-center"
                     >
                       <label className="block w-full font-poppins text-[10px] uppercase tracking-widest text-primary font-semibold text-center">Guests Attending</label>
-                      <div className="w-[78%] min-w-[260px] max-w-[360px] bg-black/30 backdrop-blur-sm border border-primary/35 rounded-2xl p-2 shadow-[0_0_20px_rgba(212,175,55,0.18)]">
-                        <div className="grid grid-cols-5 gap-2">
-                          {guestOptions.map((count) => {
-                            const isActive = formData.guestCount === count;
-                            return (
-                              <button
-                                key={count}
-                                type="button"
-                                onClick={() => setFormData({ ...formData, guestCount: count })}
-                                className={`h-10 rounded-xl font-poppins text-sm font-medium border transition-all duration-300 cursor-pointer ${
-                                  isActive
-                                    ? 'border-primary bg-primary/20 text-accent shadow-[0_0_12px_rgba(212,175,55,0.2)]'
-                                    : 'border-primary/30 bg-black/20 text-text/70 hover:border-primary/55 hover:text-text'
-                                }`}
-                              >
-                                {count === 5 ? '5+' : count}
-                              </button>
-                            );
-                          })}
-                        </div>
-                        <p className="mt-2 text-center font-poppins text-[11px] text-text/55 tracking-wide">
-                          {formData.guestCount === 5 ? '5+ Guests' : `${formData.guestCount} Guest${formData.guestCount > 1 ? 's' : ''}`}
-                        </p>
+                      <div className="w-[78%] min-w-[260px] max-w-[340px] flex items-center justify-between bg-black/30 backdrop-blur-sm border border-primary/35 rounded-2xl px-4 py-3 shadow-[0_0_20px_rgba(212,175,55,0.18)]">
+                        <button type="button" onClick={() => handleGuestChange(-1)} className="w-9 h-9 rounded-lg border border-primary/45 flex items-center justify-center text-primary hover:bg-primary/10 transition-colors cursor-pointer text-sm">
+                          <BiMinus />
+                        </button>
+                        <span className="font-cinzel text-lg text-accent font-semibold text-center">{formData.guestCount} Guest{formData.guestCount > 1 ? 's' : ''}</span>
+                        <button type="button" onClick={() => handleGuestChange(1)} className="w-9 h-9 rounded-lg border border-primary/45 flex items-center justify-center text-primary hover:bg-primary/10 transition-colors cursor-pointer text-sm">
+                          <BiPlus />
+                        </button>
                       </div>
                     </motion.div>
                   )}
