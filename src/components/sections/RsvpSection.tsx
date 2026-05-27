@@ -20,6 +20,14 @@ interface RsvpEntry {
 // Frosted-glass panel style (matches reference dark luxury card treatment)
 const themeCard = 'relative rounded-2xl bg-white/[0.035] backdrop-blur-xl border border-primary/35 shadow-[0_18px_48px_rgba(0,0,0,0.5)] overflow-hidden';
 
+const getVisibleWishCount = (entries: RsvpEntry[]) => {
+  const newest = entries.slice(0, 8);
+  const longest = newest.reduce((max, entry) => Math.max(max, (entry.dietaryOrNotes || entry.dietary_or_notes || '').length), 0);
+  if (longest > 260) return 2;
+  if (longest > 140) return 3;
+  return 4;
+};
+
 export default function RsvpSection() {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -33,6 +41,8 @@ export default function RsvpSection() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [entries, setEntries] = useState<RsvpEntry[]>([]);
   const [fetching, setFetching] = useState(true);
+  const [wishStartIndex, setWishStartIndex] = useState(0);
+  const [isWishWallPaused, setIsWishWallPaused] = useState(false);
 
   useEffect(() => {
     fetch('/api/rsvp')
@@ -78,13 +88,33 @@ export default function RsvpSection() {
 
   const getName = (e: RsvpEntry) => e.fullName || e.full_name || 'Guest';
   const getNote = (e: RsvpEntry) => e.dietaryOrNotes || e.dietary_or_notes || '';
+  const visibleWishCount = getVisibleWishCount(entries);
+
+  useEffect(() => {
+    if (isWishWallPaused || entries.length <= 1) return;
+    const timer = setInterval(() => {
+      setWishStartIndex((prev) => (prev + 1) % entries.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, [entries.length, isWishWallPaused]);
+
+  useEffect(() => {
+    if (wishStartIndex >= entries.length) {
+      setWishStartIndex(0);
+    }
+  }, [entries.length, wishStartIndex]);
+
+  const slidingWishes =
+    entries.length <= visibleWishCount
+      ? entries
+      : Array.from({ length: visibleWishCount }, (_, idx) => entries[(wishStartIndex + idx) % entries.length]);
 
   return (
     <SectionContainer id="rsvp" className="relative z-10 py-12 md:py-24">
       <SectionTitle title={content.rsvp.sectionTitle} subtitle={content.rsvp.sectionSubtitle} />
 
       {/* 3-col grid on desktop, stacked on mobile */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start md:items-stretch max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch max-w-5xl mx-auto">
 
         {/* ══════════════════════════
             Column 1 — RSVP Form
@@ -217,12 +247,16 @@ export default function RsvpSection() {
         {/* ══════════════════════════
             Column 2 — Wishes Wall
             ══════════════════════════ */}
-        <div className={`${themeCard} p-7 flex flex-col h-full md:min-h-[560px]`}>
+        <div
+          className={`${themeCard} p-7 flex flex-col h-full md:min-h-[560px]`}
+          onMouseEnter={() => setIsWishWallPaused(true)}
+          onMouseLeave={() => setIsWishWallPaused(false)}
+        >
           <h3 className="font-cinzel text-xs text-primary tracking-[0.2em] uppercase mb-4 flex items-center gap-2 flex-shrink-0 font-semibold">
             <MdFavorite className="text-primary/60" /> Wishes & Prayers
           </h3>
 
-          <div className="flex-1 overflow-y-auto space-y-3 pr-0.5">
+          <div className="flex-1 min-h-0 overflow-hidden space-y-3 pr-0.5">
             {fetching && (
               <div className="flex justify-center pt-8">
                 <BiLoaderAlt className="animate-spin text-primary text-xl" />
@@ -234,12 +268,14 @@ export default function RsvpSection() {
               </p>
             )}
 
-            <AnimatePresence initial={false}>
-              {entries.map((entry, i) => (
+            <AnimatePresence initial={false} mode="popLayout">
+              {slidingWishes.map((entry, i) => (
                 <motion.div
-                  key={entry.created_at + i}
+                  layout
+                  key={`${entry.created_at}-${i}-${wishStartIndex}`}
                   initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
                   transition={{ duration: 0.35 }}
                   className="p-3.5 rounded-xl bg-black/28 backdrop-blur-sm border border-primary/25 shadow-sm space-y-1.5 overflow-hidden"
                 >
