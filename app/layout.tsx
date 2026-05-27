@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Cinzel, Great_Vibes, Montserrat } from 'next/font/google';
+import { Cinzel, Cormorant_Garamond, Montserrat } from 'next/font/google';
 import './globals.css';
 import AppProviders from './providers';
 
@@ -15,10 +15,11 @@ const cinzel = Cinzel({
   display: 'swap',
 });
 
-const greatVibes = Great_Vibes({
+const cormorantGaramond = Cormorant_Garamond({
   subsets: ['latin'],
-  variable: '--font-great-vibes',
-  weight: '400',
+  variable: '--font-cormorant-garamond',
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
   display: 'swap',
 });
 
@@ -50,7 +51,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} ${cinzel.variable} ${greatVibes.variable}`}>
+      <body className={`${montserrat.variable} ${cinzel.variable} ${cormorantGaramond.variable}`}>
         <AppProviders>{children}</AppProviders>
       </body>
     </html>

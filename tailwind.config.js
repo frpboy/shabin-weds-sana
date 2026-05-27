@@ -14,7 +14,7 @@ export default {
       },
       fontFamily: {
         cinzel: ['Cinzel', 'serif'],
-        cormorant: ['Great Vibes', 'cursive'],
+        cormorant: ['Cormorant Garamond', 'serif'],
         poppins: ['Montserrat', 'sans-serif'],
         inter: ['Montserrat', 'sans-serif'],
       },
