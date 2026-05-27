@@ -200,13 +200,13 @@ export default function RsvpSection() {
                       exit={{ opacity: 0, height: 0 }}
                       className="space-y-1.5 overflow-hidden flex flex-col items-center"
                     >
-                      <label className="block w-full font-poppins text-[10px] uppercase tracking-widest text-primary font-semibold text-center">Number of Guests</label>
-                      <div className="flex items-center gap-4 bg-black/30 backdrop-blur-sm border border-primary/30 rounded-xl p-2.5 w-fit">
-                        <button type="button" onClick={() => handleGuestChange(-1)} className="w-8 h-8 rounded-lg border border-primary/40 flex items-center justify-center text-primary hover:bg-primary/10 transition-colors cursor-pointer text-sm">
+                      <label className="block w-full font-poppins text-[10px] uppercase tracking-widest text-primary font-semibold text-center">Guests Attending</label>
+                      <div className="w-[78%] min-w-[260px] max-w-[340px] flex items-center justify-between bg-black/30 backdrop-blur-sm border border-primary/35 rounded-2xl px-4 py-3 shadow-[0_0_20px_rgba(212,175,55,0.18)]">
+                        <button type="button" onClick={() => handleGuestChange(-1)} className="w-9 h-9 rounded-lg border border-primary/45 flex items-center justify-center text-primary hover:bg-primary/10 transition-colors cursor-pointer text-sm">
                           <BiMinus />
                         </button>
-                        <span className="font-cinzel text-xl text-accent font-semibold min-w-[1.5rem] text-center">{formData.guestCount}</span>
-                        <button type="button" onClick={() => handleGuestChange(1)} className="w-8 h-8 rounded-lg border border-primary/40 flex items-center justify-center text-primary hover:bg-primary/10 transition-colors cursor-pointer text-sm">
+                        <span className="font-cinzel text-lg text-accent font-semibold text-center">{formData.guestCount} Guest{formData.guestCount > 1 ? 's' : ''}</span>
+                        <button type="button" onClick={() => handleGuestChange(1)} className="w-9 h-9 rounded-lg border border-primary/45 flex items-center justify-center text-primary hover:bg-primary/10 transition-colors cursor-pointer text-sm">
                           <BiPlus />
                         </button>
                       </div>
