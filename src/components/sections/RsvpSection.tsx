@@ -20,6 +20,14 @@ interface RsvpEntry {
 // Frosted-glass panel style (matches reference dark luxury card treatment)
 const themeCard = 'relative rounded-2xl bg-white/[0.035] backdrop-blur-xl border border-primary/35 shadow-[0_18px_48px_rgba(0,0,0,0.5)] overflow-hidden';
 
+const getVisibleWishCount = (entries: RsvpEntry[]) => {
+  const newest = entries.slice(0, 8);
+  const longest = newest.reduce((max, entry) => Math.max(max, (entry.dietaryOrNotes || entry.dietary_or_notes || '').length), 0);
+  if (longest > 260) return 2;
+  if (longest > 140) return 3;
+  return 4;
+};
+
 export default function RsvpSection() {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -80,7 +88,7 @@ export default function RsvpSection() {
 
   const getName = (e: RsvpEntry) => e.fullName || e.full_name || 'Guest';
   const getNote = (e: RsvpEntry) => e.dietaryOrNotes || e.dietary_or_notes || '';
-  const visibleWishCount = 1;
+  const visibleWishCount = getVisibleWishCount(entries);
 
   useEffect(() => {
     if (isWishWallPaused || entries.length <= 1) return;
@@ -265,10 +273,10 @@ export default function RsvpSection() {
                 <motion.div
                   layout
                   key={`${entry.created_at}-${i}-${wishStartIndex}`}
-                  initial={{ opacity: 0, y: -8 }}
+                  initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 8 }}
-                  transition={{ duration: 0.35 }}
+                  exit={{ opacity: 0, y: -24 }}
+                  transition={{ duration: 0.4 }}
                   className="p-3.5 rounded-xl bg-black/28 backdrop-blur-sm border border-primary/25 shadow-sm space-y-1.5 overflow-hidden"
                 >
                   <span className={`flex items-center gap-1.5 text-[10px] font-poppins font-semibold uppercase tracking-wider ${

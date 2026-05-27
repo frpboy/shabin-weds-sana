@@ -28,6 +28,34 @@ Designed to evoke calm, emotional resonance, and high-fidelity aesthetics, this 
 
 ---
 
+## 🆕 RSVP & Wishes Wall (Latest UI Behavior)
+
+The RSVP section (`src/components/sections/RsvpSection.tsx`) now includes a locked dual-card layout and an animated one-by-one wishes slider.
+
+### Layout and sizing
+- Desktop cards are fixed to equal width and height.
+- Grid uses 2 fixed desktop columns (`420px` each) and centered alignment.
+- Both RSVP and Wishes cards use the same fixed desktop height (`560px`) to stay visually aligned.
+
+### Wishes Wall auto-slider
+- Wishes rotate automatically every **3 seconds**.
+- Slider shows **one message at a time** (one-by-one flow).
+- Hover on the wishes card pauses the loop completely for readability.
+- Framer Motion `AnimatePresence` with `mode="popLayout"` is used for smoother transitions.
+
+### Content density logic
+- Wishes are prepared using character-length-aware logic in component state.
+- Current display mode is intentionally set to a single visible item (`visibleWishCount = 1`) for focused reading and stable card height.
+
+### Typography update
+- The wishes message style switched from **Great Vibes** to **Cormorant Garamond**.
+- `font-cormorant` now maps to `Cormorant Garamond` in:
+  - `src/styles/globals.css`
+  - `tailwind.config.js`
+- Font loading is handled via `next/font/google` in `app/layout.tsx` with italic support.
+
+---
+
 ## 🚀 Quickstart
 
 ### Prerequisites
@@ -68,8 +96,8 @@ Designed to evoke calm, emotional resonance, and high-fidelity aesthetics, this 
    ```bash
    npm run dev
    ```
-   - Frontend → `http://localhost:5173`
-- RSVP API → `http://localhost:3000/api/rsvp` (served by Next.js Route Handler)
+   - Frontend → `http://localhost:3000`
+   - RSVP API → `http://localhost:3000/api/rsvp` (served by Next.js Route Handler)
 
 6. **Production build**:
    ```bash
