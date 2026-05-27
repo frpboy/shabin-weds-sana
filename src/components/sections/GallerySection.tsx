@@ -10,9 +10,19 @@ type GalleryPhoto = {
   caption: string;
 };
 
+const pickResponsiveImage = (src: string, viewportWidth: number, dpr: number) => {
+  const match = src.match(/^(.*)\.(webp|jpe?g|png)$/i);
+  if (!match) return src;
+  const [, base, ext] = match;
+  const target = viewportWidth * dpr;
+  const width = target <= 700 ? 640 : target <= 1100 ? 960 : 1280;
+  return `${base}-${width}.${ext}`;
+};
+
 export default function GallerySection({ photos }: { photos: GalleryPhoto[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState<number>(() => (typeof window === 'undefined' ? 1280 : window.innerWidth));
 
   useEffect(() => {
     if (photos.length === 0) return;
@@ -29,6 +39,12 @@ export default function GallerySection({ photos }: { photos: GalleryPhoto[] }) {
     }
   }, [currentIndex, photos.length]);
 
+  useEffect(() => {
+    const onResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
   const handleNext = () => {
     if (photos.length === 0) return;
     setDirection(1);
@@ -42,6 +58,9 @@ export default function GallerySection({ photos }: { photos: GalleryPhoto[] }) {
   };
 
   const activePhoto = photos[currentIndex];
+  const activePhotoUrl = activePhoto
+    ? pickResponsiveImage(activePhoto.url, viewportWidth, typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1)
+    : '';
 
   const variants = {
     enter: (dir: number) => ({
@@ -108,7 +127,7 @@ export default function GallerySection({ photos }: { photos: GalleryPhoto[] }) {
                 <motion.img
                   animate={{ scale: [1, 1.08, 1] }}
                   transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
-                  src={activePhoto.url}
+                  src={activePhotoUrl}
                   alt={activePhoto.caption}
                   loading={activePhoto.id === 1 ? "eager" : "lazy"}
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 pointer-events-none"

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Cinzel, Cormorant_Garamond, Montserrat } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import AppProviders from './providers';
 
@@ -51,7 +52,26 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://www.clarity.ms" crossOrigin="anonymous" />
+      </head>
       <body className={`${montserrat.variable} ${cinzel.variable} ${cormorantGaramond.variable}`}>
+        <Script id="clarity-analytics" strategy="lazyOnload">
+          {`
+            (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              function loadClarity() {
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              }
+              if ("requestIdleCallback" in c) {
+                c.requestIdleCallback(loadClarity, { timeout: 2500 });
+              } else {
+                setTimeout(loadClarity, 1500);
+              }
+            })(window, document, "clarity", "script", "wsl77zfey5");
+          `}
+        </Script>
         <AppProviders>{children}</AppProviders>
       </body>
     </html>
