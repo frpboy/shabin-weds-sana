@@ -114,12 +114,12 @@ export default function RsvpSection() {
       <SectionTitle title={content.rsvp.sectionTitle} subtitle={content.rsvp.sectionSubtitle} />
 
       {/* 3-col grid on desktop, stacked on mobile */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:[grid-template-columns:repeat(2,420px)] md:justify-center gap-5 items-stretch max-w-5xl mx-auto">
 
         {/* ══════════════════════════
             Column 1 — RSVP Form
             ══════════════════════════ */}
-        <div className={`${themeCard} p-7 h-full md:min-h-[560px]`}>
+        <div className={`${themeCard} p-7 h-full md:h-[560px]`}>
           <AnimatePresence mode="wait">
             {submitted ? (
               <motion.div
@@ -248,7 +248,7 @@ export default function RsvpSection() {
             Column 2 — Wishes Wall
             ══════════════════════════ */}
         <div
-          className={`${themeCard} p-7 flex flex-col h-full md:min-h-[560px]`}
+          className={`${themeCard} p-7 flex flex-col h-full md:h-[560px]`}
           onMouseEnter={() => setIsWishWallPaused(true)}
           onMouseLeave={() => setIsWishWallPaused(false)}
         >
