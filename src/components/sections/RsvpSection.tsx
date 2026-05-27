@@ -198,9 +198,9 @@ export default function RsvpSection() {
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: 'auto' }}
                       exit={{ opacity: 0, height: 0 }}
-                      className="space-y-1.5 overflow-hidden"
+                      className="space-y-1.5 overflow-hidden flex flex-col items-center"
                     >
-                      <label className="block font-poppins text-[10px] uppercase tracking-widest text-primary font-semibold">Number of Guests</label>
+                      <label className="block w-full font-poppins text-[10px] uppercase tracking-widest text-primary font-semibold text-center">Number of Guests</label>
                       <div className="flex items-center gap-4 bg-black/30 backdrop-blur-sm border border-primary/30 rounded-xl p-2.5 w-fit">
                         <button type="button" onClick={() => handleGuestChange(-1)} className="w-8 h-8 rounded-lg border border-primary/40 flex items-center justify-center text-primary hover:bg-primary/10 transition-colors cursor-pointer text-sm">
                           <BiMinus />
