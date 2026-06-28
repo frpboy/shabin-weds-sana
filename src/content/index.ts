@@ -22,8 +22,13 @@ export const content = {
     events: [
       {
         time: "4:30 PM onward",
-        title: "Wedding Nikah & Reception",
-        description: "The sacred ceremony followed by a celebratory feast.",
+        title: "Grand Reception",
+        description: "Join us for an evening of celebration, love, and a traditional feast as we mark the beginning of our married life.",
+      },
+      {
+        time: "6:00 PM onward",
+        title: "Family Ceremony",
+        description: "The sacred ceremony followed by a celebratory feast for the family and close relatives.",
       },
     ],
   },
