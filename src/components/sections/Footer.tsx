@@ -6,9 +6,9 @@ import { getWhatsAppShareUrl, shareToInstagram } from '../../lib/share';
 
 export default function Footer() {
   const [instagramToast, setInstagramToast] = useState<'copied' | null>(null);
-  const webLink = 'https://shabin-weds-sana.vercel.app/';
+  const webLink = 'https://www.shabin.sahakar-celebrations.in/';
   const rawMessage = `You are joyfully invited to the wedding celebration of Muhammed Shabin & Sana Subair on Sunday, July 19, 2026 at ${weddingData.wedding.venue}.\n\nGrand Reception: 4:30 PM Onwards\nFamily Ceremony: 6:00 PM Onwards\n\nView details & RSVP: ${webLink}`;
-  
+
   const whatsappShareUrl = getWhatsAppShareUrl(rawMessage);
 
 
@@ -54,8 +54,8 @@ export default function Footer() {
             </Button>
           </a>
 
-          <Button 
-            variant="glass" 
+          <Button
+            variant="glass"
             onClick={handleInstagramShare}
             className="flex items-center gap-2.5 px-7 py-3.5 shadow-sm border-primary/50 text-accent hover:bg-primary/15 font-medium cursor-pointer transition-all duration-300"
           >
@@ -86,10 +86,10 @@ export default function Footer() {
         <div className="font-poppins text-xs text-text/50 tracking-widest font-light space-y-2 mt-8">
           <p>
             Made with love & prayers by{' '}
-            <a 
-              href="https://github.com/frpboy" 
-              target="_blank" 
-              rel="noopener noreferrer" 
+            <a
+              href="https://github.com/frpboy"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-primary hover:underline font-medium transition-colors"
             >
               Rahul

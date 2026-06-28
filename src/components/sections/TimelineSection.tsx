@@ -10,13 +10,13 @@ export default function TimelineSection() {
     {
       title: 'Grand Reception',
       time: 'July 19, 2026 • 4:30 PM Onwards',
-      location: weddingData.wedding.venue || 'Shifa Convention Center',
+      location: weddingData.wedding.venue || 'Shifa Convention Center, Perinthalmanna',
       desc: 'Join us for an evening of celebration, love, and a traditional feast as we mark the beginning of our married life.',
     },
     {
       title: 'Family Ceremony',
       time: 'July 19, 2026 • 6:00 PM Onwards',
-      location: weddingData.wedding.venue || 'Shifa Convention Center',
+      location: weddingData.wedding.venue || 'Shifa Convention Center, Perinthalmanna',
       desc: 'The sacred ceremony followed by a celebratory feast for the family and close relatives.',
     },
   ];

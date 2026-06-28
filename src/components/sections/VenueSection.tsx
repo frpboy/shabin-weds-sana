@@ -6,7 +6,7 @@ import { weddingData } from '../../config/weddingData';
 import { BiMap, BiNavigation, BiCalendarPlus } from 'react-icons/bi';
 
 export default function VenueSection() {
-  const venueName = weddingData.wedding.venue || 'Shifa Convention Center';
+  const venueName = weddingData.wedding.venue || 'Shifa Convention Center, Perinthalmanna';
   const venueAddress = weddingData.wedding.address || 'Perinthalmanna, Kerala';
   const mapsUrl = weddingData.wedding.mapsUrl || 'https://maps.app.goo.gl/JDr5v3dgUuwPNbnJA';
   const calendarUrl = weddingData.wedding.calendarUrl;
@@ -35,7 +35,7 @@ export default function VenueSection() {
           {/* Google Maps Query Embed Inside Card */}
           <div className="relative w-full h-[260px] md:h-[360px] rounded-xl overflow-hidden border border-primary/30 shadow-inner mb-8 bg-secondary/30">
             <iframe
-              title="Shifa Convention Center Map"
+              title="Shifa Convention Center, Perinthalmanna Map"
               src="https://maps.google.com/maps?q=Shifa%20Convention%20Center,%20Perinthalmanna,%20Kerala&t=&z=12&ie=UTF8&iwloc=&output=embed"
               width="100%"
               height="100%"
