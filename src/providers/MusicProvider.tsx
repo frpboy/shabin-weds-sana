@@ -19,8 +19,10 @@ export function MusicProvider({
   audioUrl?: string; 
 }) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolumeState] = useState(0.4);
+  const [volume, setVolumeState] = useState(0.0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const fadeIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const hasFadedInRef = useRef(false);
   const wasPlayingRef = useRef(false);
 
   useEffect(() => {
@@ -31,6 +33,9 @@ export function MusicProvider({
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
+      }
+      if (fadeIntervalRef.current) {
+        clearInterval(fadeIntervalRef.current);
       }
     };
   }, [audioUrl]);
@@ -86,7 +91,48 @@ export function MusicProvider({
     };
   }, [isPlaying]);
 
+  const startFadeIn = () => {
+    if (!audioRef.current) return;
+
+    if (fadeIntervalRef.current) {
+      clearInterval(fadeIntervalRef.current);
+    }
+
+    const startVolume = 0.0;
+    const targetVolume = 0.25;
+    const durationMs = 5000;
+    const intervalMs = 50;
+    const steps = durationMs / intervalMs;
+    const stepVolume = (targetVolume - startVolume) / steps;
+
+    let currentVolume = startVolume;
+    audioRef.current.volume = currentVolume;
+    setVolumeState(currentVolume);
+
+    fadeIntervalRef.current = setInterval(() => {
+      if (!audioRef.current) {
+        if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+        return;
+      }
+
+      currentVolume = Math.min(targetVolume, currentVolume + stepVolume);
+      audioRef.current.volume = currentVolume;
+      setVolumeState(currentVolume);
+
+      if (currentVolume >= targetVolume) {
+        if (fadeIntervalRef.current) {
+          clearInterval(fadeIntervalRef.current);
+          fadeIntervalRef.current = null;
+        }
+      }
+    }, intervalMs);
+  };
+
   const setVolume = (v: number) => {
+    if (fadeIntervalRef.current) {
+      clearInterval(fadeIntervalRef.current);
+      fadeIntervalRef.current = null;
+    }
     setVolumeState(v);
     if (audioRef.current) {
       audioRef.current.volume = v;
@@ -98,6 +144,12 @@ export function MusicProvider({
     audioRef.current.play().then(() => {
       setIsPlaying(true);
       wasPlayingRef.current = false;
+      if (!hasFadedInRef.current) {
+        startFadeIn();
+        hasFadedInRef.current = true;
+      } else if (audioRef.current && audioRef.current.volume === 0) {
+        startFadeIn();
+      }
     }).catch(() => {
       setIsPlaying(false);
     });
@@ -106,6 +158,12 @@ export function MusicProvider({
   const pause = () => {
     if (!audioRef.current) return;
     audioRef.current.pause();
+    if (fadeIntervalRef.current) {
+      clearInterval(fadeIntervalRef.current);
+      fadeIntervalRef.current = null;
+    }
+    audioRef.current.volume = 0;
+    setVolumeState(0);
     setIsPlaying(false);
     wasPlayingRef.current = false;
   };
