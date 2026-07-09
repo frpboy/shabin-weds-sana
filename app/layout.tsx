@@ -25,7 +25,10 @@ const cormorantGaramond = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://shabin-weds-sana.vercel.app'),
+  metadataBase: new URL('https://www.shabin.sahakar-celebrations.in'),
+  alternates: {
+    canonical: 'https://www.shabin.sahakar-celebrations.in/',
+  },
   title: 'Shabin & Sana — Wedding Invitation',
   description: 'Wedding invitation and RSVP website for Muhammed Shabin and Sana Subair.',
   icons: {
@@ -36,6 +39,8 @@ export const metadata: Metadata = {
     apple: [{ url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   openGraph: {
+    url: 'https://www.shabin.sahakar-celebrations.in/',
+    siteName: 'Shabin Weds Sana',
     title: 'Shabin & Sana — Wedding Invitation',
     description: 'Wedding invitation and RSVP website for Muhammed Shabin and Sana Subair.',
     images: [{ url: '/og/og-card.png', width: 1200, height: 630, alt: 'Wedding themed invitation card' }],
