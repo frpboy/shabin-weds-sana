@@ -59,6 +59,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://www.clarity.ms" crossOrigin="anonymous" />
+        <meta property="og:image:secure_url" content="https://www.shabin.sahakar-celebrations.in/og/og-card.png" />
+        <meta property="og:image:type" content="image/png" />
+        <meta name="twitter:image:alt" content="Shabin & Sana Wedding Invitation" />
       </head>
       <body className={`${montserrat.variable} ${cinzel.variable} ${cormorantGaramond.variable}`}>
         <Script id="clarity-analytics" strategy="lazyOnload">
